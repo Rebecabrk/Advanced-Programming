@@ -17,6 +17,7 @@ public class Lab3 {
      */
     public static void main(String[] args) {
         Trip trip1 = new Trip("Venice", LocalDate.now(), LocalDate.of(2024,3,22));
+        TravelPlan travelplan = new TravelPlan(trip1);
         
         Attraction statue = new Statue("Statue San Marco", "These columns are at the southern entrance of St. Mark's Square used to be an entrance for merchant ships coming to Venice. ");
         Attraction church = new Church("Church Of Vivaldi", "Enjoy the classical concerts of the masterful Interpreti Veneziani with musical works by Antonio Vivaldi, Arcangelo Corelli, Giuseppe Tartini, Felix Mendelssohn, Pablo de Sarasate or Niccolo Paganini.");
@@ -24,6 +25,9 @@ public class Lab3 {
  
         trip1.setAttractions(statue, church, concert);
         System.out.println(trip1);
+        trip1.visitableAttractions();
+        travelplan.createTravelPlan();
+        System.out.println(travelplan);
     }
     
 }

@@ -4,6 +4,9 @@
  */
 package lab3;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  *
  * @author rebec
@@ -44,4 +47,5 @@ public abstract class Attraction implements Comparable<Attraction> {
     public int compareTo(Attraction o){
         return this.name.compareTo(o.name);
     }
+
 }
