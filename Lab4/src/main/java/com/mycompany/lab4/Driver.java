@@ -1,0 +1,52 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.lab4;
+
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
+
+/**
+ *
+ * @author rebec
+ */
+public class Driver extends Person {
+    private Passenger passenger;
+    private Map<Number, Destination> route;
+    private int numberOfDestinations = 0;
+
+    public Driver(String name) {
+        super(name);
+        route = new HashMap<>();
+    }
+
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
+
+    public void setRoute(Destination dest) {
+        numberOfDestinations++ ;
+        route.put(numberOfDestinations, dest);
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public Map<Number, Destination> getRoute() {
+        return route;
+    }
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "name='" + getName() + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
