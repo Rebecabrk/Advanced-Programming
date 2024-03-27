@@ -6,10 +6,10 @@ package com.mycompany.lab4;
 import com.github.javafaker.Faker;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 import java.util.Random;
@@ -25,12 +25,22 @@ public class Lab4 {
         Random rand = new Random();
         return rand.nextInt(80 - 18 + 1) + 18;
     }
+    
+    public static int randomNumber(){
+        Random rand = new Random();
+        return rand.nextInt(8-3+1) + 3;
+    }
+    
+    public static Destination randomDestination(){
+        Destination[] destinations = Destination.values();
+        Random rand = new Random();
+        return destinations[rand.nextInt(destinations.length)];
+    }
 
     public static void main(String[] args) {
         Faker faker = new Faker();
-        ArrayList<Person> people =new ArrayList<>(Arrays.asList());
+        ArrayList<Person> people =new ArrayList<>();
 
-        
         for(int i=0; i<12; i++){
             Person aux = new Driver(faker.name().fullName());
             aux.setAge(randomAge());
@@ -42,22 +52,31 @@ public class Lab4 {
             people.add(aux);
         }
         
-        Stream<Person> drivers = people.stream()
-                                        .filter(p -> p instanceof Driver);
-        LinkedList<Person> driversList = drivers.collect(Collectors.toCollection(LinkedList::new));
-        Stream<Person> passengers = people.stream()
-                                           .filter(p -> p instanceof Passenger);
-        TreeSet<Person> passengersTree = passengers.collect(Collectors.toCollection(TreeSet::new));
+        LinkedList<Driver> drivers = people.stream()
+            .filter(Driver.class::isInstance)
+            .map(Driver.class::cast)
+            .collect(Collectors.toCollection(LinkedList::new));
 
-        Collections.sort(driversList, Comparator.comparingInt(Person::getAge));
+        TreeSet<Passenger> passengers = people.stream()
+            .filter(Passenger.class::isInstance)
+            .map(Passenger.class::cast)
+            .collect(Collectors.toCollection(TreeSet::new));
+        
+        Collections.sort(drivers, Comparator.comparingInt(Person::getAge));
 
-        for (Person d : driversList) {
-            Driver aux = (Driver) d;
-            System.out.println(aux);
+        for (Driver d : drivers) {
+            int i = randomNumber();
+            for(;i>0;i--){
+                d.setRoute(randomDestination());
+            }
+            System.out.println(d);
         }
-        for (Person p : passengersTree) {
-            Passenger aux = (Passenger) p;
-            System.out.println(aux);
+        for (Passenger p : passengers) {
+            p.setDestination(randomDestination());
+            System.out.println(p);
         }
+        System.out.println("\nSolution: ");
+        Bolt bolt = new Bolt();
+        bolt.solution(drivers, passengers);
     }
 }

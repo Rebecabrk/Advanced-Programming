@@ -10,20 +10,13 @@ package com.mycompany.lab4;
  */
 public class Person {
     private String name;
-    int age;
-    Destination destination;
+    private int age;
     
     public Person(String name){
         this.name = name;
     }
     public String getName(){
         return name;
-    }
-    public void setDestination(Destination dest){
-        destination = dest;
-    }
-    public Destination getDestination(){
-        return destination;
     }
 
     public void setName(String name) {

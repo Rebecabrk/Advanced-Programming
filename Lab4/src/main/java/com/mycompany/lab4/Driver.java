@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Driver extends Person {
     private Passenger passenger;
-    private Map<Number, Destination> route;
+    private Map<Destination, Number> route;
     private int numberOfDestinations = 0;
 
     public Driver(String name) {
@@ -26,22 +26,30 @@ public class Driver extends Person {
     }
 
     public void setRoute(Destination dest) {
+        if(!route.containsKey(dest)){
         numberOfDestinations++ ;
-        route.put(numberOfDestinations, dest);
+        route.put(dest, numberOfDestinations);
+        }
     }
 
     public Passenger getPassenger() {
         return passenger;
     }
 
-    public Map<Number, Destination> getRoute() {
+    public Map<Destination, Number> getRoute() {
         return route;
     }
     @Override
     public String toString() {
-        return "Driver{" +
-                "name='" + getName() + '\'' +
-                ", age=" + age +
-                '}';
+        StringBuilder result = new StringBuilder("Driver{ name=")
+                                    .append(getName())
+                                    .append(", age=")
+                                    .append(getAge())
+                                    .append(", route:\n");
+        for(Map.Entry<Destination, Number> dest : route.entrySet()){
+            result.append(dest.getValue()).append(". ").append(dest.getKey()).append("\n");
+        }
+        result.append("}");
+        return result.toString();
     }
 }

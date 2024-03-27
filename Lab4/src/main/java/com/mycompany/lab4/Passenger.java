@@ -9,20 +9,20 @@ package com.mycompany.lab4;
  * @author rebec
  */
 public class Passenger extends Person implements Comparable<Passenger> {
-    Driver driver;
+    Destination dest;
 
     public Passenger(String name) {
         super(name);
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public Destination getDestination() {
+        return dest;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public void setDestination(Destination dest) {
+        this.dest = dest;
     }
-    
+
     @Override
     public int compareTo(Passenger other) {
         return super.getName().compareTo(other.getName());
@@ -32,6 +32,7 @@ public class Passenger extends Person implements Comparable<Passenger> {
     public String toString() {
         return "Passenger{" +
                 "name='" + getName() + '\'' +
+                ", destination=" + getDestination() +
                 '}';
     }
 }
