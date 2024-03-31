@@ -9,4 +9,7 @@ package lab5;
  * @author rebec
  */
 public record Person(int id, String name) {
+    public int getId(){
+        return this.id;
+    }
 }

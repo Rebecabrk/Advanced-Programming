@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
  */
 package lab5;
 
@@ -8,4 +8,9 @@ package lab5;
  *
  * @author rebec
  */
-public record Document(String name, Format format) {} 
+public enum Format {
+    jpeg,
+    jpg,
+    PDF,
+    txt
+}

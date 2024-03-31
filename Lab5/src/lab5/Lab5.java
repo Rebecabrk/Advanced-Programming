@@ -4,6 +4,8 @@
  */
 package lab5;
 
+import static lab5.Format.jpg;
+
 /**
  *
  * @author rebec
@@ -14,7 +16,12 @@ public class Lab5 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Repository r = new Repository(1);
+        
+        Document d = new Document("rebeca's photo", jpg);
+        r.add(d);
+        
+        r.ls();
     }
     
 }
