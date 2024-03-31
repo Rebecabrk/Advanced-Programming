@@ -14,29 +14,17 @@ public class Repository{
     private String name; //name of the sub-directory of every person 
     HashSet<Document> content;
     
-    public Repository(int id){
+    public Repository(Person p){
         content = new HashSet<>();
-        this.name = Integer.toString(id);
+        name = new String("#");
+        this.name = name + Integer.toString(p.id());
     }
     
     public void add(Document d){
         if(content.contains(d)){
-            System.out.println("Document " + d.name() + "already exists!");
+            System.out.println("Document " + d.file().getName() + "already exists!");
         }else{
-            String[] words = d.name().split("\\s+");
-            StringBuilder new_d_name = new StringBuilder();
-            int i=words.length;
-            for(String word : words){
-                new_d_name.append(word);
-                if(i > 1){
-                    new_d_name.append("_");
-                }
-                i--;
-            }
-            new_d_name.append(".").append(d.format());
-            
-            Document new_d = new Document(new_d_name.toString(), d.format());
-            content.add(new_d);
+            content.add(d);
         }
     }
     
@@ -46,7 +34,7 @@ public class Repository{
         }else{
             System.out.println("The content of " + name + ":");
             for(Document d : content){
-                System.out.println(d.name());
+                System.out.println(d.file().getName());
             }
         }
     }

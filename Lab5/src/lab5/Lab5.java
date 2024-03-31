@@ -4,6 +4,7 @@
  */
 package lab5;
 
+import java.io.File;
 import static lab5.Format.jpg;
 
 /**
@@ -16,11 +17,13 @@ public class Lab5 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Repository r = new Repository(1);
+        Person rebeca = new Person(1,"Rebeca Costache");
+        Repository r = new Repository(rebeca);
+        File f = new File("rebeca.txt");
+        Document d = new Document(f);
         
-        Document d = new Document("rebeca's photo", jpg);
+        r.ls();
         r.add(d);
-        
         r.ls();
     }
     
