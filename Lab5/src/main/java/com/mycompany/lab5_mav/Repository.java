@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab5;
+package com.mycompany.lab5_mav;
 
 import java.util.HashSet;
 
@@ -10,9 +10,13 @@ import java.util.HashSet;
  *
  * @author rebec
  */
-public class Repository{ 
+public class Repository {
     private String name; //name of the sub-directory of every person 
-    HashSet<Document> content;
+    private HashSet<Document> content;
+
+    public String getName() {
+        return name;
+    }
     
     public Repository(Person p){
         content = new HashSet<>();
@@ -28,14 +32,16 @@ public class Repository{
         }
     }
     
-    public void ls(){
+    public String ls(){
+        StringBuilder result = new StringBuilder();
         if(content.isEmpty()){
-            System.out.println(name + " is empty.");
+            result.append("This directory is empty.");
         }else{
-            System.out.println("The content of " + name + ":");
             for(Document d : content){
+                result.append(d.file().getName() + "\n");
                 System.out.println(d.file().getName());
             }
         }
+        return result.toString();
     }
 }

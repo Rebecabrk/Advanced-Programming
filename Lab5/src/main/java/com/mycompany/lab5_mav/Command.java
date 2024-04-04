@@ -2,14 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab5;
+package com.mycompany.lab5_mav;
 
 /**
  *
  * @author rebec
  */
-public class view extends Command {
-    public void view(){
-        
-    }
+public abstract class Command {
+    private String name;
+    private String[] flags;
+    private String[] arguments;
+    
 }
