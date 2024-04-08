@@ -80,13 +80,13 @@ public class Lab1Bonus {
      */
     public static void main(String[] args) {
         int n = 6;
-        int[][] matrix = createWheelGraph(n);
+        
         
         for (int i = 0; i < n; i++)
         {
             graph[i] = new Vector<>();
         }
-        
+        int[][] matrix = createWheelGraph(n);
         prettyPrinting(matrix, n);
         
         int[] color = new int[1000];
@@ -97,7 +97,7 @@ public class Lab1Bonus {
         if(cyclenumber == n*n - 3*n + 3){
             System.out.println("Am gasit toate ciuclurile: " + cyclenumber);
         }else{
-            System.out.println("Slab ma.");
+            System.out.println("Slab ma." + cyclenumber);
         }
         
     }

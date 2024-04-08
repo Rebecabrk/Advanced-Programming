@@ -1,0 +1,2 @@
+Comparable - ordine naturala
+Comparator - criterii custom de sortare
