@@ -24,7 +24,13 @@ public class GenreDAO implements DAO {
 
     @Override
     public void create(String... names) {
-        Connection con = Database.getConnection();
+        Connection con = null;
+        try{
+            con = Database.getConnection();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        
         for (int i = 0; i < names.length; i++) {
             try (PreparedStatement pstmt = con.prepareStatement(
                     "insert into genre (id, type) values (?, ?)")) {
@@ -40,7 +46,12 @@ public class GenreDAO implements DAO {
 
     @Override
     public int findByName(String name) {
-        Connection con = Database.getConnection();
+        Connection con = null;
+        try{
+            con = Database.getConnection();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
                 "select id from genre where type='" + name + "'")) {
             return rs.next() ? rs.getInt(1) : null;
@@ -53,7 +64,12 @@ public class GenreDAO implements DAO {
 
     @Override
     public String findById(int id) {
-        Connection con = Database.getConnection();
+        Connection con = null;
+        try{
+            con = Database.getConnection();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
                 "select name from genre where id='" + id + "'")) {
             return rs.next() ? rs.getNString("type") : null;
@@ -66,7 +82,12 @@ public class GenreDAO implements DAO {
 
     @Override
     public void findAll() {
-        Connection con = Database.getConnection();
+        Connection con = null;
+        try{
+            con = Database.getConnection();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
                 "select * from genre")) {
             ResultSetMetaData rsmd = rs.getMetaData();

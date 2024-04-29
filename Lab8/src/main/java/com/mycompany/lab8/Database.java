@@ -7,6 +7,9 @@ package com.mycompany.lab8;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.commons.dbcp2.BasicDataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,45 +17,80 @@ import java.sql.SQLException;
  */
 public class Database {
 
-    private static final String URL
-            = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "password";
-    private static Connection connection = null;
+//    private static final String URL
+//            = "jdbc:postgresql://localhost:5432/postgres";
+//    private static final String USER = "postgres";
+//    private static final String PASSWORD = "password";
+//    private static Connection connection = null;
+//
+//    private Database() {
+//    }
+//
+//    public static Connection getConnection() {
+//        if (connection == null) {
+//            createConnection();
+//        }
+//        return connection;
+//    }
+//
+//    public static void createConnection() {
+//        try {
+//            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//            connection.setAutoCommit(false);
+//        } catch (SQLException e) {
+//            System.err.println(e);
+//        }
+//    }
+//
+//    public static void closeConnection() {
+//        try{
+//            if(connection != null)
+//                connection.close();
+//        }catch (SQLException e) {
+//            System.err.println(e);
+//        }
+//    }
+//    public static void rollback(){
+//        try{
+//            if(connection != null)
+//                connection.rollback();
+//        }catch (SQLException e) {
+//            System.err.println(e);
+//        }
+//    }
+    private static BasicDataSource ds = new BasicDataSource();
 
-    private Database() {
+    static {
+        ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
+        ds.setUsername("postgres");
+        ds.setPassword("password");
+        ds.setMinIdle(5);
+        ds.setMaxIdle(10);
+        ds.setMaxOpenPreparedStatements(100);
+        ds.setAutoCommitOnReturn(false);
     }
 
-    public static Connection getConnection() {
-        if (connection == null) {
-            createConnection();
-        }
-        return connection;
-    }
-
-    public static void createConnection() {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
+    public static Connection getConnection() throws SQLException {
+        return ds.getConnection();
     }
 
     public static void closeConnection() {
+
         try{
-            if(connection != null)
-                connection.close();
+            if(ds.getConnection() != null)
+                ds.getConnection().close();
         }catch (SQLException e) {
             System.err.println(e);
         }
     }
-    public static void rollback(){
+
+    public static void rollback() {
         try{
-            if(connection != null)
-                connection.rollback();
+            if(ds.getConnection() != null)
+                ds.getConnection().rollback();
         }catch (SQLException e) {
             System.err.println(e);
         }
     }
+
 }

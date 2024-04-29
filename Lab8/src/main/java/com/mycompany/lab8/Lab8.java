@@ -3,6 +3,7 @@
  */
 package com.mycompany.lab8;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -13,20 +14,21 @@ public class Lab8 {
 
     public static void main(String[] args) {
         try {
-            Database.createConnection();
             
             var authors = new AuthorDAO();
             authors.create("William Shakespeare");
             var genres = new GenreDAO();
             genres.create("Tragedy");
-            Database.getConnection().commit();
+            //Database.getConnection().commit();
             var books = new BookDAO(); //findByName
             books.create("Romeo and Juliet", "William Shakespeare", "Tragedy");
             books.create("The Hitchhiker's Guide to the Galaxy",
                     "Douglas Adams", "Science");
-            Database.getConnection().commit();
+            //Database.getConnection().commit();
             
-            books.findAll();
+            BookDAO.importData();
+            //SET client_encoding TO 'UTF8';
+            books.findAll(); //from books_initial
             
             Database.getConnection().close();
         } catch (SQLException e) {
